@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cp /etc/collectd/configs/collectd.graphite.conf.tpl /etc/collectd/collectd.conf.tpl
+
+envtpl /etc/collectd/collectd.conf.tpl
+python /main.py -s $EP_HOST -p $EP_PORT -e $ENV -n $NODE /dev/null  2>&1 &
+
+collectd -f
